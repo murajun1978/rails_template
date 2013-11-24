@@ -56,18 +56,23 @@ end
 get @template_url + 'secret_token.rb', 'config/initializers/secret_token.rb'
 
 # spec_helper
-inject_into_file 'spec/spec_helper.rb', after: 'RSpec.configure do |config|' do <<-SPEC
-config.before :suite do
-  DatabaseRewinder.clean_all
+inject_into_file 'spec/spec_helper.rb', after: 'RSpec.configure do |config|' do 
+<<-DATABASE_REWINDER
+
+  config.before :suite do
+    DatabaseRewinder.clean_all
+  end
+
+  config.after :each do
+    DatabaseRewinder.clean
+  end
+
+DATABASE_REWINDER
 end
 
-config.after :each do
-  DatabaseRewinder.clean
-end
-SPEC
-end
+append_file '.gitignore' do 
+<<-GIT
 
-append_file '.gitignore' do <<-GIT
 /vendor/bundler
 /coverage
 /.secret
