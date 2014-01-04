@@ -8,4 +8,4 @@ def secure_token
     token
   end
 end
-PaperclipSample::Application.config.secret_key_base = secure_token
+#{Rails.application.class.parent_name}::Application.config.secret_key_base = secure_token
