@@ -45,7 +45,7 @@ end
 Bundler.with_clean_env do 
   inject_into_file 'Gemfile', after: "gem 'sqlite3'" do 
   <<-GEMFILE
-, group: [:development, :test]
+  , group: [:development, :test]
   GEMFILE
   end
 
@@ -64,6 +64,11 @@ end
 
 # secret_token.rb
 get @template_url + 'secret_token.rb', 'config/initializers/secret_token.rb'
+append_file 'config/initializers/secret_token.rb' do 
+  <<-TOKEN
+  #{Rails.application.class.to_s.split("::").first + "::Application.config.secret_key_base = secure_token"}
+  TOKEN
+end
 
 # spec_helper
 inject_into_file 'spec/spec_helper.rb', after: 'RSpec.configure do |config|' do 
