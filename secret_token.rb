@@ -8,4 +8,3 @@ def secure_token
     token
   end
 end
-"#{Rails.application.class.to_s.split("::").first + "::Application.config.secret_key_base = secure_token"}"
