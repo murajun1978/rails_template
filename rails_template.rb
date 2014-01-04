@@ -2,7 +2,10 @@ require 'bundler'
 
 @template_url = 'https://raw.github.com/murajun1978/rails_template/master/'
 
+gem 'pg', group: :production
+gem 'bcrypt-ruby'
 gem 'everywhere'
+gem 'bcrypt-ruby'
 
 gem_group :development, :test do 
   gem 'rspec-rails'
@@ -27,7 +30,7 @@ gem_group :development, :test do
   
   gem 'rb-fsevent'
   gem 'terminal-notifier-guard'
-  gem 'guard-rspec'
+  gem 'guard-rspec', require: false
 end
 
 gem_group :test do 
@@ -36,10 +39,17 @@ gem_group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'turnip'
+  gem 'fuubar'
 end
 
 Bundler.with_clean_env do 
-  run 'bundle install'
+  inject_into_file 'Gemfile', after: "gem 'sqlite3'" do 
+  <<-GEMFILE
+, group: [:development, :test]
+  GEMFILE
+  end
+
+  run 'bundle install --without production'
 end
 
 run 'bundle exec rails g rspec:install'
