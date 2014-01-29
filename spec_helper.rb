@@ -15,7 +15,12 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
   config.before :suite do
-    DatabaseRewinder.clean_all
+    DatabaseRewinder.strategy = :transaction
+    DatabaseRewinder.clean_with(:truncation)
+  end
+
+  config.after :each do
+    DatabaseRewinder.start
   end
 
   config.after :each do
