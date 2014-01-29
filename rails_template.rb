@@ -28,9 +28,10 @@ gem_group :development, :test do
   gem 'binding_of_caller'
   gem 'table_print'
   
-  gem 'rb-fsevent'
-  gem 'terminal-notifier-guard'
-  gem 'guard-rspec', require: false
+  gem 'rack-mini-profiler'
+  gem 'xray-rails' 
+
+  gem 'mail_view', '~> 1.0.3'
 end
 
 gem_group :test do 
@@ -53,11 +54,11 @@ Bundler.with_clean_env do
 end
 
 run 'bundle exec rails g rspec:install'
-run 'bundle exec guard init rspec'
 
 # remove files
 %w(
   config/initializers/secret_token.rb
+  spec/spec_helper.rb
 ).each do |file|
   remove_file file
 end
@@ -71,19 +72,7 @@ append_file 'config/initializers/secret_token.rb' do
 end
 
 # spec_helper
-inject_into_file 'spec/spec_helper.rb', after: 'RSpec.configure do |config|' do 
-<<-DATABASE_REWINDER
-
-  config.before :suite do
-    DatabaseRewinder.clean_all
-  end
-
-  config.after :each do
-    DatabaseRewinder.clean
-  end
-
-DATABASE_REWINDER
-end
+get @template_url + 'spec_helper.rb', 'spec/spec_helper.rb'
 
 append_file '.gitignore' do 
 <<-GIT
