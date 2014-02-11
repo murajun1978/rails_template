@@ -4,6 +4,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara'
 require 'capybara/rspec'
+require 'factory_girl'
 
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
@@ -19,6 +20,10 @@ RSpec.configure do |config|
     DatabaseRewinder.clean_with(:truncation)
   end
 
+  config.before :all do
+    FactoryGirl.reload 
+  end
+  
   config.after :each do
     DatabaseRewinder.start
   end
