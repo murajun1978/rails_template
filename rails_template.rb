@@ -32,6 +32,8 @@ gem_group :development, :test do
   gem 'xray-rails' 
 
   gem 'mail_view', '~> 1.0.3'
+
+  gem 'spring'
 end
 
 gem_group :test do 
@@ -53,6 +55,7 @@ Bundler.with_clean_env do
   run 'bundle install --without production'
 end
 
+run 'bundle exec spring binstub --all'
 run 'bundle exec rails g rspec:install'
 
 # remove files
