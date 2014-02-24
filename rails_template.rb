@@ -6,6 +6,8 @@ gem 'pg', group: :production
 gem 'bcrypt-ruby'
 gem 'everywhere'
 gem 'bcrypt-ruby'
+gem 'settingslogic'
+gem 'quiet_assets', group: :development
 
 gem_group :development, :test do 
   gem 'rspec-rails'
@@ -34,6 +36,9 @@ gem_group :development, :test do
   gem 'mail_view', '~> 1.0.3'
 
   gem 'spring'
+
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 gem_group :test do 
@@ -57,6 +62,7 @@ end
 
 run 'bundle exec spring binstub --all'
 run 'bundle exec rails g rspec:install'
+run 'bundle exec rake rails:templates:copy'
 
 # remove files
 %w(
