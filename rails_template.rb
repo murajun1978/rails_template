@@ -61,8 +61,8 @@ Bundler.with_clean_env do
   run 'bundle install --without production'
 end
 
-run 'bundle exec spring binstub --all'
 run 'bundle exec rails g rspec:install'
+run 'bundle exec spring binstub --all'
 run 'bundle exec rake rails:templates:copy'
 
 # remove files
