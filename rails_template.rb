@@ -76,9 +76,9 @@ end
 # secret_token.rb
 get @template_url + 'secret_token.rb', 'config/initializers/secret_token.rb'
 append_file 'config/initializers/secret_token.rb' do 
-  <<-TOKEN
-  ApplicationClassName::Application.config.secret_key_base = secure_token
-  TOKEN
+<<-TOKEN
+#{app_name}::Application.config.secret_key_base = secure_token
+TOKEN
 end
 
 # spec_helper
@@ -106,3 +106,5 @@ inject_into_file 'app/assets/javascripts/application.js', before: '//= require_t
 //= require bootstrap
 JAVASCRIPT
 end
+
+File.rename('app/assets/stylesheets/application.css', 'app/assets/stylesheets/application.scss')
