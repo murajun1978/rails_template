@@ -95,7 +95,7 @@ GIT
 end
 
 # bootstrap
-inject_into_file 'app/assets/stylesheets/application.css' do
+append_file 'app/assets/stylesheets/application.css' do
   <<-CSS
     @import "bootstrap";
   CSS
