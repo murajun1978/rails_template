@@ -2,6 +2,7 @@ require 'bundler'
 
 @template_url = 'https://raw.github.com/murajun1978/rails_template/master/'
 
+gem 'bootstrap-sass'
 gem 'pg', group: :production
 gem 'bcrypt-ruby'
 gem 'everywhere'
@@ -92,3 +93,11 @@ append_file '.gitignore' do
 .DS_Store
 GIT
 end
+
+# bootstrap
+inject_into_file 'app/assets/stylesheets/application.css' do
+  <<-CSS
+    @import "bootstrap";
+  CSS
+end
+
