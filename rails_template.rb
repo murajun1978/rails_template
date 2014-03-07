@@ -96,8 +96,13 @@ end
 
 # bootstrap
 append_file 'app/assets/stylesheets/application.css' do
-  <<-CSS
-    @import "bootstrap";
-  CSS
+<<-CSS
+@import "bootstrap";
+CSS
 end
 
+inject_into_file 'app/assets/javascripts/application.js', before: '//= require_tree .' do
+<<-JAVASCRIPT
+//= require bootstrap
+JAVASCRIPT
+end
