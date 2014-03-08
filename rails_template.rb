@@ -77,7 +77,7 @@ end
 get @template_url + 'secret_token.rb', 'config/initializers/secret_token.rb'
 append_file 'config/initializers/secret_token.rb' do 
 <<-TOKEN
-#{app_name}::Application.config.secret_key_base = secure_token
+#{app_name.split('_').map(&:capitalize).join('')}::Application.config.secret_key_base = secure_token
 TOKEN
 end
 
