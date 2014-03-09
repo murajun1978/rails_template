@@ -84,6 +84,12 @@ end
 # spec_helper
 get @template_url + 'spec_helper.rb', 'spec/spec_helper.rb'
 
+append_file '.rspec' do
+<<-RSPEC
+--format Fuubar
+RSPEC
+end
+
 append_file '.gitignore' do 
 <<-GIT
 
