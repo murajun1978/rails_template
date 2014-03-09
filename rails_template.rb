@@ -91,6 +91,19 @@ append_file '.rspec' do
 RSPEC
 end
 
+inject_into_file 'config/application.rb', after: 'class Application < Rails::Application' do
+<<-RSPEC
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        routing_specs: false,
+        controller_specs: false,
+        view_specs: false,
+        helper_specs: false
+    end
+RSPEC
+end
+
 append_file '.gitignore' do 
 <<-GIT
 
