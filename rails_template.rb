@@ -37,6 +37,7 @@ gem_group :development, :test do
   gem 'mail_view', '~> 1.0.3'
 
   gem 'spring'
+  gem 'spring-commands-rspec'
 
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
