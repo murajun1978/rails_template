@@ -90,6 +90,7 @@ append_file '.gitignore' do
 /vendor/bundler
 /coverage
 /.secret
+/.rbenv-gemsets
 .DS_Store
 GIT
 end
