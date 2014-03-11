@@ -8,7 +8,11 @@ gem 'bcrypt-ruby'
 gem 'everywhere'
 gem 'bcrypt-ruby'
 gem 'settingslogic'
-gem 'quiet_assets', group: :development
+
+gem_group :development do
+  gem 'quiet_assets'
+  gem 'rack-mini-profiler'
+end
 
 gem_group :development, :test do 
   gem 'rspec-rails'
@@ -101,6 +105,8 @@ inject_into_file 'config/application.rb', after: 'class Application < Rails::App
         view_specs: false,
         helper_specs: false
     end
+
+    config.quiet_assets = true
 RSPEC
 end
 
